@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BISLEA — Bureau of Indian Standards Laboratory Employees Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0c1a35;--deep:#07111f;
+  --saffron:#e8731a;--gold:#c9a84c;--gold-light:#e2c97e;
+  --cream:#f4efe6;--muted:#8899aa;--white:#ffffff;
+  --border:rgba(200,180,140,0.18);
+  /* Logo colours */
+  --logo-bg:#1a3a8f;--logo-text:#ffffff;
+  --logo-stripe:#ffffff;--logo-stripe-op:0.18;
+}
+@media(prefers-color-scheme:light){
+  :root{--logo-bg:#ffffff;--logo-text:#1a3a8f;--logo-stripe:#1a3a8f;--logo-stripe-op:0.12;}
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--deep);color:var(--cream);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.03;pointer-events:none;z-index:999}
+
+/* ── LOGO ── */
+.bislea-logo-box{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:10px;
+  background:var(--logo-bg);
+  border:2px solid rgba(255,255,255,0.15);
+  box-shadow:0 2px 12px rgba(26,58,143,0.35),inset 0 1px 0 rgba(255,255,255,0.2);
+  position:relative;overflow:hidden;flex-shrink:0;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+@media(prefers-color-scheme:light){
+  .bislea-logo-box{border:2px solid rgba(26,58,143,0.25);box-shadow:0 2px 12px rgba(26,58,143,0.2),inset 0 1px 0 rgba(255,255,255,0.9)}
+}
+.bislea-logo-box::before{
+  content:'';position:absolute;top:-10px;right:-10px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,var(--logo-stripe-op));
+}
+.bislea-logo-box:hover{transform:scale(1.06);box-shadow:0 4px 20px rgba(26,58,143,0.5)}
+.bislea-logo-letters{
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:11px;
+  letter-spacing:0.06em;color:var(--logo-text);line-height:1;
+  position:relative;z-index:1;user-select:none;
+}
+.bislea-logo-sub{
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+  letter-spacing:0.08em;color:var(--gold-light);
+}
+@media(prefers-color-scheme:light){
+  .bislea-logo-sub{color:#1a3a8f}
+}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:68px;background:rgba(7,17,31,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+@media(prefers-color-scheme:light){nav{background:rgba(255,255,255,0.92);border-bottom:1px solid rgba(26,58,143,0.12)}}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{text-decoration:none;font-size:13px;font-weight:500;color:var(--muted);letter-spacing:.04em;transition:color .2s}
+.nav-links a:hover{color:var(--cream)}
+.nav-cta{background:linear-gradient(135deg,var(--saffron),#d4630c);color:var(--white)!important;padding:8px 18px;border-radius:6px;font-weight:500!important}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;place-items:center;padding:120px 5vw 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 40%,rgba(232,115,26,.12) 0%,transparent 60%),linear-gradient(180deg,var(--deep) 0%,#0a1628 100%)}
+.hero-deco{position:absolute;opacity:.06;pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:900px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:500;letter-spacing:.1em;color:var(--gold-light);text-transform:uppercase;margin-bottom:32px;animation:fadeUp .8s ease both}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--saffron)}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:700;line-height:1.05;letter-spacing:-.01em;margin-bottom:28px;animation:fadeUp .8s .1s ease both}
+h1 span{color:var(--saffron);font-style:italic}
+.hero-sub{font-size:clamp(1rem,2vw,1.2rem);font-weight:300;color:var(--muted);line-height:1.7;max-width:640px;margin:0 auto 48px;animation:fadeUp .8s .2s ease both}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s .3s ease both}
+
+.btn-primary{background:linear-gradient(135deg,var(--saffron),#c85e00);color:var(--white);font-weight:500;font-size:15px;padding:14px 32px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(232,115,26,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,115,26,.45)}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--cream);font-weight:500;font-size:15px;padding:14px 32px;border-radius:8px;text-decoration:none;cursor:pointer;transition:border-color .2s,background .2s}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(201,168,76,.08)}
+
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:72px;animation:fadeUp .8s .4s ease both}
+.stat{background:rgba(12,26,53,.6);padding:24px 32px;text-align:left}
+.stat-num{font-family:'Bebas Neue',monospace;font-size:3rem;font-weight:400;color:var(--gold-light);line-height:1;letter-spacing:.06em}
+.stat-label{font-size:12px;font-weight:400;color:var(--muted);margin-top:6px;letter-spacing:.04em}
+
+/* ── SECTION SHARED ── */
+section{padding:100px 5vw}
+.section-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;color:var(--saffron);text-transform:uppercase;margin-bottom:14px}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.15;margin-bottom:20px}
+.section-desc{font-size:16px;font-weight:300;color:var(--muted);line-height:1.8;max-width:560px;margin-bottom:56px}
+.divider{width:48px;height:2px;background:linear-gradient(90deg,var(--saffron),transparent);margin-bottom:24px}
+
+/* ── ABOUT ── */
+#about{background:linear-gradient(180deg,var(--deep) 0%,#0c1a35 100%)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.about-text p{font-size:16px;font-weight:300;color:rgba(244,239,230,.8);line-height:1.9;margin-bottom:20px}
+.about-cards{display:flex;flex-direction:column;gap:16px}
+.about-card{background:rgba(12,26,53,.7);border:1px solid var(--border);border-radius:10px;padding:24px 28px;transition:border-color .25s,transform .25s;text-decoration:none;display:block;color:inherit}
+.about-card:hover{border-color:rgba(201,168,76,.4);transform:translateX(6px)}
+.about-card-year{font-family:'DM Mono',monospace;font-size:11px;color:var(--saffron);letter-spacing:.1em;margin-bottom:6px}
+.about-card h3{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--cream)}
+.about-card p{font-size:13px;color:var(--muted);line-height:1.6}
+.download-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--gold-light);margin-top:10px;font-weight:500}
+
+/* ── LABS ── */
+#labs{background:linear-gradient(180deg,#0a1628 0%,var(--navy) 100%)}
+.labs-tabs{display:flex;gap:4px;background:rgba(7,17,31,.6);border:1px solid var(--border);border-radius:10px;padding:4px;width:fit-content;margin-bottom:40px}
+.labs-tab{padding:9px 22px;border-radius:7px;font-size:13px;font-weight:500;letter-spacing:.03em;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif}
+.labs-tab.active{background:linear-gradient(135deg,var(--saffron),#c85e00);color:var(--white)}
+.labs-panel{display:none}
+.labs-panel.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+.lab-card{background:rgba(7,17,31,.65);border:1px solid var(--border);border-radius:12px;padding:28px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
+.lab-card:hover{border-color:rgba(232,115,26,.4);transform:translateY(-3px)}
+.lab-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--saffron),var(--gold),transparent)}
+.lab-type-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--saffron);padding:3px 10px;border:1px solid rgba(232,115,26,.3);border-radius:100px;margin-bottom:14px}
+.lab-card h3{font-size:16px;font-weight:600;color:var(--cream);margin-bottom:12px;line-height:1.3}
+.lab-info-row{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.lab-info-icon{font-size:13px;flex-shrink:0;margin-top:1px;opacity:.7}
+.lab-info-text{font-size:12.5px;color:var(--muted);line-height:1.55}
+.lab-info-text strong{color:rgba(244,239,230,.85);font-weight:500}
+.lab-divider{height:1px;background:var(--border);margin:14px 0}
+
+/* ── NOTICES ── */
+#notices{background:var(--navy)}
+.notices-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:16px}
+.notices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.notice-card{background:rgba(7,17,31,.6);border:1px solid var(--border);border-radius:12px;padding:28px;transition:border-color .25s,transform .25s;display:flex;flex-direction:column}
+.notice-card:hover{border-color:rgba(232,115,26,.4);transform:translateY(-4px)}
+.notice-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px}
+.notice-card h3{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--cream)}
+.notice-card>p{font-size:13px;color:var(--muted);line-height:1.7;flex:1}
+.notice-links{display:flex;flex-direction:column;gap:5px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+.notice-link{font-size:12px;font-weight:500;color:var(--gold-light);text-decoration:none;padding:5px 10px;border-radius:5px;background:rgba(201,168,76,.07);border:1px solid transparent;transition:background .2s,border-color .2s,color .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notice-link:hover{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.3);color:var(--cream)}
+
+/* ── RESOURCES ── */
+#resources{background:linear-gradient(180deg,var(--navy) 0%,var(--deep) 100%)}
+.resources-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.resource-row{display:flex;align-items:center;gap:20px;background:rgba(12,26,53,.5);border:1px solid var(--border);border-radius:10px;padding:22px 24px;text-decoration:none;color:inherit;transition:border-color .25s,background .25s}
+.resource-row:hover{border-color:rgba(201,168,76,.4);background:rgba(12,26,53,.9)}
+.resource-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--saffron);opacity:.7;flex-shrink:0;width:28px}
+.resource-row h4{font-size:14px;font-weight:600;color:var(--cream);margin-bottom:4px}
+.resource-row p{font-size:12px;color:var(--muted);line-height:1.5}
+.resource-arrow{margin-left:auto;flex-shrink:0;color:var(--muted);font-size:18px;transition:color .2s,transform .2s}
+.resource-row:hover .resource-arrow{color:var(--gold);transform:translateX(4px)}
+
+/* ── CONTACT ── */
+#contact{background:var(--deep);padding:80px 5vw}
+.contact-inner{max-width:800px;margin:0 auto;background:linear-gradient(135deg,rgba(12,26,53,.8),rgba(12,26,53,.4));border:1px solid var(--border);border-radius:16px;padding:60px;text-align:center;position:relative;overflow:hidden}
+.contact-inner::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(232,115,26,.15),transparent 70%)}
+.contact-inner h2{margin-bottom:16px}
+.contact-inner p{font-size:15px;color:var(--muted);margin-bottom:36px;line-height:1.7}
+.contact-items{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.contact-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--cream);background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:12px 20px;text-decoration:none;transition:border-color .2s}
+.contact-item:hover{border-color:var(--gold)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:32px 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer p{font-size:12px;color:var(--muted)}
+footer a{color:var(--gold-light);text-decoration:none}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .about-grid,.resources-grid{grid-template-columns:1fr}
+  .notices-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .stats{grid-template-columns:1fr}
+}
+@media(max-width:600px){.contact-inner{padding:40px 24px}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="bislea-logo-box">
+      <span class="bislea-logo-letters">BISLEA</span>
+    </div>
+    <span class="bislea-logo-sub">BISLEA</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#labs">Laboratories</a></li>
+    <li><a href="#notices">Notices</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-deco" style="top:10%;right:5%;width:420px" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="210" cy="210" r="209" stroke="#c9a84c" stroke-width="1"/>
+    <circle cx="210" cy="210" r="160" stroke="#c9a84c" stroke-width="1"/>
+    <circle cx="210" cy="210" r="110" stroke="#e8731a" stroke-width="1"/>
+    <line x1="0" y1="210" x2="420" y2="210" stroke="#c9a84c" stroke-width="0.5"/>
+    <line x1="210" y1="0" x2="210" y2="420" stroke="#c9a84c" stroke-width="0.5"/>
+    <line x1="60" y1="60" x2="360" y2="360" stroke="#c9a84c" stroke-width="0.5"/>
+    <line x1="360" y1="60" x2="60" y2="360" stroke="#c9a84c" stroke-width="0.5"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-badge">Est. 2010 &middot; Reg. under Societies Act 1860</div>
+    <h1>Bureau of Indian Standards<br><span>Laboratory Employees</span><br>Association</h1>
+    <p class="hero-sub">Serving the dedicated scientists and technical staff across all 10 BIS Laboratories under the Ministry of Consumer Affairs, Government of India.</p>
+    <div class="hero-actions">
+      <a href="#about" class="btn-primary">Explore BISLEA</a>
+      <a href="#contact" class="btn-ghost">Contact Us</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-num">10</div><div class="stat-label">BIS Laboratories Represented</div></div>
+      <div class="stat"><div class="stat-num">2010</div><div class="stat-label">Year of Registration</div></div>
+      <div class="stat"><div class="stat-num">GOI</div><div class="stat-label">Recognised under CCS RSA Rules 1993</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p class="section-tag">// Who We Are</p>
+      <div class="divider"></div>
+      <h2>A Recognised Voice for Lab Employees</h2>
+      <p>BISLEA is the registered employees' association for the laboratory staff of the Bureau of Indian Standards, recognized by BIS Management since 2019.</p>
+      <p>We operate under the <strong style="color:var(--cream)">Societies Registration Act, 1860</strong> and function in accordance with the Government of India's <strong style="color:var(--cream)">CCS RSA Rules, 1993</strong>.</p>
+      <p>This website is maintained by current office bearers for transparency and accessibility of all relevant documents, circulars, and communications.</p>
+      <a href="https://docs.google.com/document/d/1eSBOdh1k2T6RkzdO5xF8AvsCaPqvF7euj0bvLYeIWsw/edit" class="btn-primary" style="display:inline-block;margin-top:16px;font-size:14px;padding:12px 24px;" target="_blank">View Current Office Bearers &rarr;</a>
+    </div>
+    <div class="about-cards reveal">
+      <a href="https://bislea.github.io/files/BISLEArecognition2019.pdf" class="about-card" target="_blank">
+        <div class="about-card-year">2019</div>
+        <h3>Recognition Letter</h3>
+        <p>Official recognition letter issued by BIS Management to BISLEA.</p>
+        <span class="download-link">&#8595; Download PDF</span>
+      </a>
+      <a href="https://bislea.github.io/files/rules.html" class="about-card" target="_blank">
+        <div class="about-card-year">2011</div>
+        <h3>Rules &amp; Regulations</h3>
+        <p>The governing rules and regulations of the BIS Laboratory Employees Association.</p>
+        <span class="download-link">&#8595; View Document</span>
+      </a>
+      <a href="https://bislea.github.io/files/memorandum.html" class="about-card" target="_blank">
+        <div class="about-card-year">2011</div>
+        <h3>Memorandum of Association</h3>
+        <p>The foundational memorandum outlining BISLEA's core objectives and structure.</p>
+        <span class="download-link">&#8595; View Document</span>
+      </a>
+      <a href="https://bislea.github.io/files/Certificate.pdf" class="about-card" target="_blank">
+        <div class="about-card-year">2010</div>
+        <h3>Registration Certificate</h3>
+        <p>Certificate issued by the Registrar of Societies, Delhi.</p>
+        <span class="download-link">&#8595; Download PDF</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- LABORATORIES -->
+<section id="labs">
+  <div class="reveal">
+    <p class="section-tag">// Complete Directory</p>
+    <div class="divider"></div>
+    <h2>BIS Laboratories Across India</h2>
+    <p class="section-desc">10 laboratories spanning Regional and Branch offices, serving the quality infrastructure needs of the entire country.</p>
+  </div>
+  <div class="labs-tabs reveal">
+    <button class="labs-tab active" onclick="switchTab('regional',this)">Regional Laboratories</button>
+    <button class="labs-tab" onclick="switchTab('branch',this)">Branch Laboratories</button>
+  </div>
+  <div class="labs-panel active" id="tab-regional">
+    <div class="lab-card reveal">
+      <span class="lab-type-badge">Central</span>
+      <h3>Central Laboratory</h3><div class="lab-divider"></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128205;</span><span class="lab-info-text">Plot No. 20/9, Site IV, Sahibabad Industrial Area, Sahibabad 201 010</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128100;</span><span class="lab-info-text"><strong>Shri K Venkateswara Rao</strong><br>Scientist-F &amp; Head</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128222;</span><span class="lab-info-text">0120-2771091-92 / 0120-2811951</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#9993;</span><span class="lab-info-text"><a href="https://bis.gov.in" style="color:var(--gold-light);text-decoration:none">cl@bis.gov.in</a></span></div>
+    </div>
+    <div class="lab-card reveal">
+      <span class="lab-type-badge">Eastern</span>
+      <h3>Eastern Regional Laboratory</h3><div class="lab-divider"></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128205;</span><span class="lab-info-text">1/14, VIP Rd, CIT Scheme VII M, Kankurgachi, Kolkata 700054</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128100;</span><span class="lab-info-text"><strong>Shri Subhadip Basu</strong><br>Scientist-F &amp; Head</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128222;</span><span class="lab-info-text">033-23209474</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#9993;</span><span class="lab-info-text">erol@bis.gov.in</span></div>
+    </div>
+    <div class="lab-card reveal">
+      <span class="lab-type-badge">Northern</span>
+      <h3>Northern Regional Laboratory</h3><div class="lab-divider"></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128205;</span><span class="lab-info-text">B-69, Phase VII, SAS Nagar Industrial Focal Point, Mohali 160051</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128100;</span><span class="lab-info-text"><strong>Shri Partha Sarthi Mandal</strong><br>Scientist-E &amp; Head</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128222;</span><span class="lab-info-text">0172-4671027, 26 / 9830655567</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#9993;</span><span class="lab-info-text">nrol@bis.gov.in</span></div>
+    </div>
+    <div class="lab-card reveal">
+      <span class="lab-type-badge">Western</span>
+      <h3>Western Regional Laboratory</h3><div class="lab-divider"></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128205;</span><span class="lab-info-text">E-9, M.I.D.C., Behind Marol Telephone Exchange, Andheri (East), Mumbai 400 093</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128100;</span><span class="lab-info-text"><strong>Dr Anil Kapri</strong><br>Scientist-E &amp; Head</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128222;</span><span class="lab-info-text">022-28327856 / 28364820</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#9993;</span><span class="lab-info-text">wrol@bis.gov.in</span></div>
+    </div>
+    <div class="lab-card reveal">
+      <span class="lab-type-badge">Southern</span>
+      <h3>Southern Regional Laboratory</h3><div class="lab-divider"></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128205;</span><span class="lab-info-text">C.I.T Campus, IV Cross Road, Chennai 600 113</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128100;</span><span class="lab-info-text"><strong>Shri M Vinod Arul Jebanath</strong><br>Scientist-F &amp; Head</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128222;</span><span class="lab-info-text">044-22541208 / 22541015</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#9993;</span><span class="lab-info-text">srol@bis.gov.in</span></div>
+    </div>
+  </div>
+  <div class="labs-panel" id="tab-branch">
+    <div class="lab-card reveal">
+      <span class="lab-type-badge" style="color:var(--gold);border-color:rgba(201,168,76,.3)">Branch</span>
+      <h3>Bangalore Branch Laboratory</h3><div class="lab-divider"></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128205;</span><span class="lab-info-text">Peenya Industrial Area, Ist Stage, Bangalore-Tumkur Road, Bangalore 560 058</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128100;</span><span class="lab-info-text"><strong>Ms Nagamani T</strong><br>Scientist-E &amp; Head</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128222;</span><span class="lab-info-text">080-23721442</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#9993;</span><span class="lab-info-text">bnbol@bis.gov.in</span></div>
+    </div>
+    <div class="lab-card reveal">
+      <span class="lab-type-badge" style="color:var(--gold);border-color:rgba(201,168,76,.3)">Branch</span>
+      <h3>Patna Branch Laboratory</h3><div class="lab-divider"></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128205;</span><span class="lab-info-text">Pataliputra Industrial Estate, Patna 800 013</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128100;</span><span class="lab-info-text"><strong>Shri Koushik Dutta</strong><br>Scientist-E &amp; Head</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128222;</span><span class="lab-info-text">0612-2262808</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#9993;</span><span class="lab-info-text">pbol@bis.gov.in</span></div>
+    </div>
+    <div class="lab-card reveal">
+      <span class="lab-type-badge" style="color:var(--gold);border-color:rgba(201,168,76,.3)">Branch</span>
+      <h3>Guwahati Branch Laboratory</h3><div class="lab-divider"></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128205;</span><span class="lab-info-text">2nd Floor, West End Block, HOUSEFED Building, Beltola Dispur, Guwahati 781006</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128100;</span><span class="lab-info-text"><strong>Shri Subhadip Basu</strong><br>Scientist-F &amp; Head</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128222;</span><span class="lab-info-text">0361-2525937</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#9993;</span><span class="lab-info-text">gbol@bis.gov.in</span></div>
+    </div>
+    <div class="lab-card reveal">
+      <span class="lab-type-badge" style="color:var(--gold);border-color:rgba(201,168,76,.3)">Branch</span>
+      <h3>Hyderabad Branch Laboratory</h3><div class="lab-divider"></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128205;</span><span class="lab-info-text">Plot Sy. No. 367/1, Industrial Development Park, Street No. 1, Moula Ali, Hyderabad 500040</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128100;</span><span class="lab-info-text"><strong>Shri M Vinod Arul Jebanath</strong><br>Scientist-F &amp; Head</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128222;</span><span class="lab-info-text">9154843232 / 9154843233</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#9993;</span><span class="lab-info-text">hybl@bis.gov.in</span></div>
+    </div>
+    <div class="lab-card reveal">
+      <span class="lab-type-badge" style="color:var(--gold);border-color:rgba(201,168,76,.3)">Branch</span>
+      <h3>Jammu &amp; Kashmir Branch Laboratory</h3><div class="lab-divider"></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128205;</span><span class="lab-info-text">Lane No. 4, SIDCO Industrial Complex, Bari Brahmana, Jammu 181133 (J&amp;K)</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128100;</span><span class="lab-info-text"><strong>Shri Partha Sarthi Mandal</strong><br>Scientist-E &amp; Head</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#128222;</span><span class="lab-info-text">01923-222690 / 222696</span></div>
+      <div class="lab-info-row"><span class="lab-info-icon">&#9993;</span><span class="lab-info-text">jk-ral@bis.gov.in</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTICES -->
+<section id="notices">
+  <div class="notices-header reveal">
+    <div>
+      <p class="section-tag">// What We Offer</p>
+      <div class="divider"></div>
+      <h2>Member Services &amp; Resources</h2>
+    </div>
+    <a href="https://bislea.github.io" class="btn-ghost" target="_blank">Visit Full Site</a>
+  </div>
+  <div class="notices-grid">
+    <div class="notice-card reveal">
+      <div class="notice-icon" style="background:rgba(232,115,26,.15)">&#128203;</div>
+      <h3>Minutes of Meetings</h3>
+      <p>Official minutes of all BISLEA meetings, kept on record for transparency and member awareness.</p>
+      <div class="notice-links">
+        <a href="https://bislea.github.io/minutes/2021-AGM-1" class="notice-link" target="_blank">&#8599; AGM 2021 &ndash; Minutes</a>
+        <a href="https://bislea.github.io/minutes/2021-SGBM-1" class="notice-link" target="_blank">&#8599; Special General Body Meeting 2021</a>
+        <a href="https://bislea.github.io/minutes/2021-EC-2" class="notice-link" target="_blank">&#8599; 2nd EC Meeting 2021</a>
+        <a href="https://bislea.github.io/minutes/2021-EC-1" class="notice-link" target="_blank">&#8599; 1st EC Meeting 2021</a>
+      </div>
+    </div>
+    <div class="notice-card reveal">
+      <div class="notice-icon" style="background:rgba(201,168,76,.15)">&#128226;</div>
+      <h3>Notices for Members</h3>
+      <p>Latest official notices issued to all BISLEA members in reverse chronological order.</p>
+      <div class="notice-links">
+        <a href="https://docs.google.com/document/d/1KwhZ1eueSxfeZq-fk9XW4xNr8DehZYAkOFYB77h1_-k/edit?usp=sharing" class="notice-link" target="_blank">&#8599; Notice &ndash; Special General Body Meeting</a>
+        <a href="https://bislea.github.io/notice/" class="notice-link" target="_blank">&#8599; View All Notices</a>
+      </div>
+    </div>
+    <div class="notice-card reveal">
+      <div class="notice-icon" style="background:rgba(12,100,180,.2)">&#128194;</div>
+      <h3>Useful Circulars &amp; RTI</h3>
+      <p>GOI circulars on CGHS, CSMA rules, leave policies, outside-post applications, and RTI formats.</p>
+      <div class="notice-links">
+        <a href="https://bislea.github.io/useful/bisemployee" class="notice-link" target="_blank">&#8599; BIS Employee Circulars</a>
+        <a href="https://bislea.github.io/useful/cgemployees" class="notice-link" target="_blank">&#8599; Central Govt Employee Circulars</a>
+        <a href="https://bislea.github.io/useful/bisleaRTI" class="notice-link" target="_blank">&#8599; RTI Information Collection</a>
+        <a href="https://bislea.github.io/useful/forteam" class="notice-link" target="_blank">&#8599; Rules &amp; Circulars for Office Bearers</a>
+      </div>
+    </div>
+    <div class="notice-card reveal">
+      <div class="notice-icon" style="background:rgba(80,200,100,.12)">&#127973;</div>
+      <h3>CGHS / Medical Benefits</h3>
+      <p>Central Government Health Scheme benefits and medical guides applicable to all BIS laboratory employees.</p>
+      <div class="notice-links">
+        <a href="https://bislea.github.io/medical" class="notice-link" target="_blank">&#8599; Medical Guide (Direct Link)</a>
+        <a href="https://bislea.github.io/useful/cgemployees" class="notice-link" target="_blank">&#8599; CG Employee Circulars incl. CGHS</a>
+      </div>
+    </div>
+    <div class="notice-card reveal">
+      <div class="notice-icon" style="background:rgba(200,80,220,.12)">&#128221;</div>
+      <h3>Leave Policies &amp; Office Notes</h3>
+      <p>Government leave entitlements, day-to-day note writing guide, and procedures for lab employees.</p>
+      <div class="notice-links">
+        <a href="https://bislea.github.io/note" class="notice-link" target="_blank">&#8599; Day-to-Day Note Writing Guide</a>
+        <a href="https://bislea.github.io/useful/cgemployees" class="notice-link" target="_blank">&#8599; Leave &amp; Service Circulars</a>
+      </div>
+    </div>
+    <div class="notice-card reveal">
+      <div class="notice-icon" style="background:rgba(232,115,26,.12)">&#9881;</div>
+      <h3>Office Work</h3>
+      <p>Templates, letter drafts, RTI applications, membership forms, and finance documents for office use.</p>
+      <div class="notice-links">
+        <a href="https://docs.google.com/document/d/1KwhZ1eueSxfeZq-fk9XW4xNr8DehZYAkOFYB77h1_-k/edit?usp=sharing" class="notice-link" target="_blank">&#8599; Letter Drafting</a>
+        <a href="https://docs.google.com/document/d/1j7eF31LXPUR4LGRz5NqYHWBaNjV2qzo2b8KUtOliU6U/edit" class="notice-link" target="_blank">&#8599; RTI Application Template</a>
+        <a href="https://bislea.github.io/files/Membership-form.pdf" class="notice-link" target="_blank">&#8595; Membership Form (PDF)</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc6yCjwtZHgoOYeKsLWQIDQdsrGzw0dHzhgiTGV30D-IPCl1w/viewform" class="notice-link" target="_blank">&#8599; Online Membership Registration</a>
+        <a href="https://docs.google.com/document/d/1ckAIy3W33GZvDobfdWichLwhPBi9lNlcGBrRYgTB5dQ/edit" class="notice-link" target="_blank">&#8599; Reimbursement of BISLEA Expenditure</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="reveal">
+    <p class="section-tag">// Quick Access</p>
+    <div class="divider"></div>
+    <h2>Key Links &amp; Documents</h2>
+    <p class="section-desc">Direct access to the most frequently needed resources for BISLEA members and BIS laboratory staff.</p>
+  </div>
+  <div class="resources-grid reveal">
+    <a href="https://bislea.github.io/minutes/" class="resource-row" target="_blank"><span class="resource-num">01</span><div><h4>Minutes of Meetings</h4><p>Official meeting records and resolutions</p></div><span class="resource-arrow">&#8594;</span></a>
+    <a href="https://bislea.github.io/notice/" class="resource-row" target="_blank"><span class="resource-num">02</span><div><h4>Notices for Members</h4><p>Announcements and member communications</p></div><span class="resource-arrow">&#8594;</span></a>
+    <a href="https://bislea.github.io/useful/" class="resource-row" target="_blank"><span class="resource-num">03</span><div><h4>Useful Circulars, Formats &amp; RTI</h4><p>GOI circulars on medical, leave, outside post, RTI</p></div><span class="resource-arrow">&#8594;</span></a>
+    <a href="https://bislea.github.io/officework/" class="resource-row" target="_blank"><span class="resource-num">04</span><div><h4>Office Work</h4><p>Templates and formats for official matters</p></div><span class="resource-arrow">&#8594;</span></a>
+    <a href="https://bislea.github.io/files/BISLEArecognition2019.pdf" class="resource-row" target="_blank"><span class="resource-num">05</span><div><h4>Recognition Letter (2019)</h4><p>Official recognition by BIS Management</p></div><span class="resource-arrow">&#8595;</span></a>
+    <a href="https://bis.gov.in" class="resource-row" target="_blank"><span class="resource-num">06</span><div><h4>Bureau of Indian Standards</h4><p>Official BIS Government of India website</p></div><span class="resource-arrow">&#8599;</span></a>
+    <a href="https://dopt.gov.in/acts/ccs-rsa-rules-1993" class="resource-row" target="_blank"><span class="resource-num">07</span><div><h4>CCS RSA Rules 1993</h4><p>DOPT &mdash; Governing rules for service associations</p></div><span class="resource-arrow">&#8599;</span></a>
+    <a href="https://bislea.github.io/sitemap/" class="resource-row" target="_blank"><span class="resource-num">08</span><div><h4>Full Sitemap</h4><p>Complete index of all pages on BISLEA website</p></div><span class="resource-arrow">&#8594;</span></a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <p class="section-tag">// Get in Touch</p>
+    <h2>Reach Out to BISLEA</h2>
+    <p>For queries, suggestions, or contributions to this website, kindly reach out to the current office bearers via email or through our GitHub repository.</p>
+    <div class="contact-items">
+      <span class="contact-item">&#9993; bisleaofficial [at] gmail.com</span>
+      <a href="https://github.com/bislea" class="contact-item" target="_blank">&#128025; github.com/bislea</a>
+      <a href="https://bislea.github.io/feed.xml" class="contact-item" target="_blank">&#128225; RSS Feed</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 BISLEA &mdash; Bureau of Indian Standards Laboratory Employees Association</p>
+  <p>Registered under <a href="https://bislea.github.io/files/Certificate.pdf" target="_blank">Societies Registration Act, 1860</a> &middot; Ministry of Consumer Affairs, Govt. of India</p>
+</footer>
+
+<script>
+function switchTab(id,btn){
+  document.querySelectorAll('.labs-panel').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.labs-tab').forEach(function(b){b.classList.remove('active')});
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  document.querySelectorAll('#tab-'+id+' .reveal:not(.visible)').forEach(function(el){observer.observe(el)});
+}
+var reveals=document.querySelectorAll('.reveal');
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry,i){
+    if(entry.isIntersecting){
+      setTimeout(function(){entry.target.classList.add('visible')},i*80);
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.1});
+reveals.forEach(function(el){observer.observe(el)});
+</script>
+</body>
+</html>
